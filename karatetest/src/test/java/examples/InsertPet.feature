@@ -2,6 +2,7 @@ Feature: Demo Pet Test
 
 Background:
 * def requestURL = 'https://petstore.swagger.io/v2/pet'
+# Creating Instance Of Token Feature File
 * def authentication = call read('Authentication.feature')
 * def authToken = mauthentication.accessToken 
 
@@ -31,8 +32,10 @@ Given path ''
 	}
       """
 	When URL requestURL
+# Passing Token to Header
 	And header Authorization = authToken
 	Then Method Post
+# Validating Status
 	And status 200
 
 Scenario: Negative Wrong Pet Data Type ID
@@ -139,6 +142,7 @@ Scenario: Security Wrong Header
 	}
       """
 	When URL requestURL
+# Passing Wrong Header Token.
 	And header Authorization = WrongHeader
 	Then Method Post
 	Then status 401
